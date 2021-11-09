@@ -14,6 +14,7 @@
   <div>
     <validation-observer ref="obs" v-slot="ObserverProps">
       <div class="post-eva" v-for="(comItem,index) in limitCount" :key="index">
+        <!--過去に予約したことがあり、その予約が現在日時よりも前のものなら評価できるようになる-->
         <div v-if="(nowdate+nowtime)>(comItem.date+comItem.time)">
           <validation-provider v-slot="ProviderProps" rules="oneOf:0.5,1,1.5,2,2.5,3,3.5,4,4.5,5">
             <div class="rating">
@@ -75,6 +76,7 @@ export default {
     date(){
       console.log(moment(new Date()))
     },
+    //過去に投稿したことがある場合投稿不可
     async send(){
       const sendData = {
         rate: this.rate,
@@ -95,6 +97,7 @@ export default {
         alert('過去に投稿しています。')
       }
     },
+    //評価を取得
     async getEvaluation(){
       console.log(this.paramsId);
       console.log('パラムスアイディー')
@@ -152,7 +155,7 @@ export default {
           return moment(date).format('YYYY/MM/DD HH:mm');
       }
   },
-  //v-forの繰り返し制限を1にする
+  //過去の予約があればコメントできるようにしているが、過去の予約が多ければその分だけ評価欄が増えるので、過去の予約を1つだけ取得するためにv-forをここで制限する
   computed: {
 　　　limitCount() {
 　　　　return this.reserves.slice(0,1)
