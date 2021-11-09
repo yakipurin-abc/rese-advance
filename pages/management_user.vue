@@ -11,38 +11,38 @@
       <h2>ユーザー管理画面</h2>
     </div>
     <div v-if="$auth.loggedIn">
-      <div class="user-add" >
-        <validation-observer ref="obs" v-slot="ObserverProps">
-    <form @submit.prevent="register">
-      <ul>
-        <li>
-          <validation-provider v-slot="ProviderProps" rules="required">
-            <input type="text" v-model="name" class="regi-form" placeholder="名前"  />
-            <div class="error">{{ ProviderProps.errors[0] }}</div>
-          </validation-provider>
-        </li>
-        <li>
-          <validation-provider v-slot="ProviderProps" rules="oneOf:1,2,3">
-            <select name="role_id" id="role_id" v-model="newRoleId">
-              <option value="" selected="selected">ロールを選んでください</option>
-              <option value="1" >管理者</option>
-              <option value="2">店長</option>
-              <option value="3">従業員</option>
-            </select>
-            <div class="error">{{ ProviderProps.errors[0] }}</div>
-          </validation-provider>
-        </li>
-        <li>
-          <validation-provider v-slot="ProviderProps" rules="required">
-          <input type="password" v-model="password" placeholder="パスワード"  class="regi-form"/>
-          <div class="error">{{ ProviderProps.errors[0] }}</div>
-          </validation-provider>
-        </li>
-      </ul>
-      <button type="submit" class="btn" :disabled="ObserverProps.invalid || !ObserverProps.validated">登録</button>
-    </form>
-    </validation-observer>
-      </div>
+      <validation-observer ref="obs" v-slot="ObserverProps">
+        <form @submit.prevent="register">
+          <div class="user-add" >
+            <div class="add-item">
+              <validation-provider v-slot="ProviderProps" rules="required">
+                <input type="text" v-model="name" class="regi-form" name="名前" placeholder="名前"  />
+                <div class="error">{{ ProviderProps.errors[0] }}</div>
+              </validation-provider>
+            </div>
+            <div class="add-item">
+              <validation-provider v-slot="ProviderProps" rules="oneOf:1,2,3">
+                <select name="role_id" id="role_id" v-model="newRoleId">
+                  <option value="" selected="selected">ロールを選んでください</option>
+                  <option value="1" >管理者</option>
+                  <option value="2">店長</option>
+                  <option value="3">従業員</option>
+                </select>
+                <div class="error">{{ ProviderProps.errors[0] }}</div>
+              </validation-provider>
+            </div>
+            <div class="add-item">
+              <validation-provider v-slot="ProviderProps" rules="required">
+                <input type="password" v-model="password" placeholder="パスワード" name="パスワード" class="regi-form"/>
+                <div class="error">{{ ProviderProps.errors[0] }}</div>
+              </validation-provider>
+            </div>
+            <div class="add-item">
+              <button type="submit" class="btn" :disabled="ObserverProps.invalid || !ObserverProps.validated">登録</button>
+            </div>
+          </div>
+        </form>
+      </validation-observer>
       <div class="user-info" >
         <table>
           <tr>
@@ -206,7 +206,10 @@ table{
   margin: 0 auto;
 }
 .user-add{
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+.add-item{
+  margin: 5px;
 }
 </style>

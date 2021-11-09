@@ -85,7 +85,7 @@
             <tr>
               <td class="shop-name">
                 <validation-provider v-slot="ProviderProps" rules="required|max:10">
-                  <input type="text" v-model="shop.name" >
+                  <input type="text" v-model="shop.name" name="店舗名">
                   <div class="error">{{ ProviderProps.errors[0] }}</div>
                 </validation-provider>
               </td>
@@ -115,13 +115,13 @@
               </td>
               <td>
                 <validation-provider v-slot="ProviderProps" rules="required|max:100">
-                  <textarea name="" id="" cols="30" rows="10" v-model="shop.detail"></textarea>
+                  <textarea name="詳細" id="" cols="30" rows="10" v-model="shop.detail"></textarea>
                   <div class="error">{{ ProviderProps.errors[0] }}</div>
                 </validation-provider>
               </td>
               <td class="shop-image">
                 <validation-provider v-slot="ProviderProps" rules="required">
-                  <input type="text" v-model="shop.image">
+                  <input type="text" v-model="shop.image" name="URL">
                   <div class="error">{{ ProviderProps.errors[0] }}</div>
                 </validation-provider>
               </td>
